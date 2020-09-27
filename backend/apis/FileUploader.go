@@ -1,4 +1,4 @@
-package upload
+package apis
 
 import(
 	"fmt"
@@ -29,5 +29,5 @@ func FileUploader(ctx *gin.Context) {
 		ctx.String(400, fmt.Sprintf("upload file error: %s", err.Error()))
 		return
 	}
-	
+	ctx.Next()
 }
