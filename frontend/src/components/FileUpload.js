@@ -1,10 +1,14 @@
 import React, { Fragment, useState } from 'react';
+import Message from './Message'
+import Progress from './Progress'
 import axios from 'axios';
 
 const FileUploader = () => {
     const [file, setFile] = useState("");
     const [filename, setFilename] = useState('Choose a PE file');
     const [uploadedFile, setUploadedFile] = useState({});
+    const [message, setMessage] = useState('');
+    const [uploadPercentage, setUploadPercentage] = useState(0);
 
 
 
@@ -18,34 +22,48 @@ const FileUploader = () => {
         const formData = new FormData();
         formData.append('file', file)
 
-        try{
+        try {
             const res = await axios.post('http://localhost:8080/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: ProgressEvent => {
+                    setUploadPercentage(parseInt(Math.round(ProgressEvent.loaded * 100 /
+                        ProgressEvent.total
+                    )))
+
+                    // Clear percentage
+                    setTimeout(() => setUploadPercentage(0), 10000);
                 }
+
+
             })
-            res.then(res => console.log(res))
-            
-    
-            // setUploadedFile({ fileName, filePath });
+
+            const { fileName, filePath } = res.data;
+
+            setUploadedFile({ fileName, filePath });
+            setMessage('File is already uploaded')
         } catch (err) {
-            console.log(err.response.data.error)
+            setMessage(err.response.data.error)
         }
-        
+
     }
 
     return (
         <Fragment>
+            {message ? <Message msg={message} /> : null}
             <form onSubmit={onSubmit}>
-                <div className="input-group is-invalid">
+                <div className="input-group is-invalid my-3">
                     <div className="custom-file">
-                        <input type="file" id="submitFile" className="custom-file-input" onChange={onChange} required/>
+                        <input type="file" id="submitFile" className="custom-file-input" onChange={onChange} required />
                         <label className="custom-file-label">{filename}</label>
                     </div>
                     <div className="input-group-append">
                         <button className="btn btn-outline-primary" type="submit">Submit</button>
-                    </div>   
+                    </div>
                 </div>
+
+                <Progress percentage={uploadPercentage}/>
             </form>
         </Fragment>
     )
