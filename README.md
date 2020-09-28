@@ -27,7 +27,6 @@ Since we are in development stage, nginx server are not done yet. Todo list will
 
 - welcomePage
 - submitPage
-- submitListPage
 - reportPage
 
 ### database
