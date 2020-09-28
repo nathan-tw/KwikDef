@@ -1,0 +1,21 @@
+version: '3'
+services: 
+    server:
+        build:
+            context: ./backend
+        ports: 
+            - "8080:8080"
+        volumes: 
+            - ./backend:/api
+        container_name: go-api
+        
+    client:
+        build:
+            context: ./frontend
+        ports: 
+            - "3000:3000"
+        container_name: react-ui
+        stdin_open: true
+        volumes: 
+            - ./frontend:/app
+            - /app/node_modules
