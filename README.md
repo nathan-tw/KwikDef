@@ -1,6 +1,6 @@
 # KwikDef
 
-```KwikDef``` is a Malware analysis system, combined with static and dynamic analysis. Using react as frontend and golang as backend server. Dynamic and static models are pre-trained based on supervised learning using malwares collected by **DDHS**(Taiwan Department of Digital Homeland Security)
+```KwikDef``` is a Malware analysis system for NCCU MIS graduate project, combined with static and dynamic analysis. Using react as frontend and golang as backend server. Dynamic and static models are pre-trained based on supervised learning using malwares collected by **DDHS**(Taiwan Department of Digital Homeland Security)
 
 <img src=https://github.com/nathan-tw/KwikDef/blob/master/system_metadata/arch.png width="900">
 
@@ -10,6 +10,8 @@
 ```zsh
 docker-compose up
 ```
+Since we are in development stage, nginx server are not done yet. Todo list will be done in following days respectively before December.
+
 React-app is listening on port 3000 and go-server on port 8080 as well. Just chech if two of them are not occupied and visit localhost:3000 is good to go.
 
 
@@ -33,6 +35,10 @@ React-app is listening on port 3000 and go-server on port 8080 as well. Just che
 ### database
 
 - Postgresql
+
+### routing server
+
+- nginx
 
 ### models
 
