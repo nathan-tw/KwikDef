@@ -1,0 +1,19 @@
+{
+    "malicious":true,
+    "att_type": {
+        "worm":30, 
+        "virus":70
+    },
+    "class": {
+        "classA": 40,
+        "classB": 15,
+        "classC": 15,
+        "classD": 4,
+        "classE": 4,
+        "classF": 2,
+        "classG": 2,
+        "classH": 3,
+        "classI": 5,
+        "classJ": 10
+    }
+}

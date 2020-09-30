@@ -1,21 +1,42 @@
-version: '3'
-services: 
-    server:
-        build:
-            context: ./backend
-        ports: 
-            - "8080:8080"
-        volumes: 
-            - ./backend:/api
-        container_name: go-api
-        
-    client:
-        build:
-            context: ./frontend
-        ports: 
-            - "3000:3000"
-        container_name: react-ui
-        stdin_open: true
-        volumes: 
-            - ./frontend:/app
-            - /app/node_modules
+version: "3"
+services:
+  api:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/api
+    container_name: go-api
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+  client:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    container_name: react-ui
+    stdin_open: true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ilove163
+  # nginx:
+  #     depends_on:
+  #         - api
+  #         - client
+  #     restart: always
+  #     build:
+  #         dockerfile: Dockerfile
+  #         context: ./nginx
+  #     ports:
+  #         - 3050:80

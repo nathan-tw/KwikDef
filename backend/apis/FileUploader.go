@@ -16,11 +16,14 @@ func FileUploader(ctx *gin.Context) {
 		})
 	}
 
+	hash := HashComputer(file)
+	
 	filepath := filepath.Base(file.Filename) 
 	ctx.JSON(http.StatusOK, gin.H{
 		"fileName": file.Filename,
 		"filePath": filepath,
 		"size":     file.Size,
+		"hash_md5": hash,
 		"mimeType": file.Header,
 	})
 

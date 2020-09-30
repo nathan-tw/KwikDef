@@ -2,10 +2,14 @@ package main
 
 import (
 
+
 	"github.com/nathan-tw/KwikDef/apis"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+
 )
+
+
 
 func main() {
 
@@ -19,7 +23,10 @@ func main() {
 			"message": "hello",
 		})
 	})
+	r.POST("/report", apis.ReportGenerator)
 	r.Run()
+
+
 }
 
 
