@@ -18,7 +18,7 @@ Since we are in development stage, nginx server are not done yet. Todo list will
 ### backend
 
 - <del> fileUploader
-- hashComputer
+- <del> hashComputer
 - reportGenerator
 - cuckooSubmitter
 - modelPredictor
@@ -27,7 +27,6 @@ Since we are in development stage, nginx server are not done yet. Todo list will
 
 - welcomePage
 - submitPage
-- loginPage
 - reportPage
 
 ### database
