@@ -23,7 +23,7 @@ func main() {
 			"message": "hello",
 		})
 	})
-	r.POST("/report", apis.ReportGenerator)
+
 	r.Run()
 
 

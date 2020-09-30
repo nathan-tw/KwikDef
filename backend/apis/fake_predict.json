@@ -4,16 +4,16 @@
         "worm":30, 
         "virus":70
     },
-    "class": {
-        "classA": 40,
-        "classB": 15,
-        "classC": 15,
-        "classD": 4,
-        "classE": 4,
-        "classF": 2,
-        "classG": 2,
-        "classH": 3,
-        "classI": 5,
-        "classJ": 10
+    "family": {
+        "familyA": 40,
+        "familyB": 15,
+        "familyC": 15,
+        "familyD": 4,
+        "familyE": 4,
+        "familyF": 2,
+        "familyG": 2,
+        "familyH": 3,
+        "familyI": 5,
+        "familyJ": 10
     }
 }
