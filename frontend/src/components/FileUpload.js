@@ -35,7 +35,8 @@ const FileUploader = () => {
 
         const res = await axios.post('http://localhost:8080/upload', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'MD5': 'slji'
             },
             onUploadProgress: ProgressEvent => {
                 setUploadPercentage(parseInt(Math.round(ProgressEvent.loaded * 100 /
