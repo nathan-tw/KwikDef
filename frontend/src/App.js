@@ -1,10 +1,10 @@
 import React from "react";
-import FileUploader from "./components/FileUpload";
+import UploadPage from "./pages/UploadPage";
 
 const App = () => {
     return (
         <div className='container'>
-            <FileUploader/>
+            <UploadPage/>
         </div>
     )
 }

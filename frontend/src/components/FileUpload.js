@@ -1,15 +1,25 @@
 import React, { Fragment, useState } from 'react';
 import Message from './Message'
 import Progress from './Progress'
+import Report from './Report'
 import axios from 'axios';
 
 const FileUploader = () => {
     const [file, setFile] = useState("");
     const [filename, setFilename] = useState('Choose a PE file');
-    const [uploadedFile, setUploadedFile] = useState({});
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState("");
     const [uploadPercentage, setUploadPercentage] = useState(0);
+    const [loading , setLoading] = useState(true);
 
+
+    const handleResult = () => {
+        var x = document.getElementById("finalResult");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+    }
 
 
     const onChange = e => {
@@ -20,32 +30,29 @@ const FileUploader = () => {
     const onSubmit = async e => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('file', file)
-
-        try {
-            const res = await axios.post('http://localhost:8080/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                onUploadProgress: ProgressEvent => {
-                    setUploadPercentage(parseInt(Math.round(ProgressEvent.loaded * 100 /
-                        ProgressEvent.total
-                    )))
-
-                    // Clear percentage
-                    setTimeout(() => setUploadPercentage(0), 10000);
-                }
+        formData.append('file', file);
 
 
-            })
+        const res = await axios.post('http://localhost:8080/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: ProgressEvent => {
+                setUploadPercentage(parseInt(Math.round(ProgressEvent.loaded * 100 /
+                    ProgressEvent.total
+                )))
 
-            const { fileName, filePath } = res.data;
+                // Clear percentage
+                setTimeout(() => setUploadPercentage(0), 10000);
+            }
+            
 
-            setUploadedFile({ fileName, filePath });
-            setMessage('File is already uploaded')
-        } catch (err) {
-            setMessage(err.response.data.error)
-        }
+
+        });
+
+        setLoading(false);
+
+        setMessage('File is already uploaded')
 
     }
 
@@ -59,13 +66,17 @@ const FileUploader = () => {
                         <label className="custom-file-label">{filename}</label>
                     </div>
                     <div className="input-group-append">
-                        <button className="btn btn-outline-primary" type="submit">Submit</button>
+                        <button className="btn btn-outline-primary" type="submit" onClick={handleResult}>Submit</button>
                     </div>
                 </div>
 
-                <Progress percentage={uploadPercentage}/>
+                <Progress percentage={uploadPercentage} />
             </form>
+            <div id='finalResult' style={{display: "none"}}>
+                <Report loading={loading} />
+            </div>
         </Fragment>
+
     )
 }
 

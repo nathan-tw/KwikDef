@@ -43,5 +43,7 @@ func FileUploader(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, finalReport)
+
+
 	ctx.Next()
 }
