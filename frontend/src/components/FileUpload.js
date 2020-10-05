@@ -33,7 +33,7 @@ const FileUploader = () => {
         formData.append('file', file);
 
 
-        const res = await axios.post('http://localhost:8080/upload', formData, {
+        const res = await axios.post('http://localhost:8080/file/submit', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'MD5': 'slji'
@@ -66,12 +66,12 @@ const FileUploader = () => {
                         <input type="file" id="submitFile" className="custom-file-input" onChange={onChange} required />
                         <label className="custom-file-label">{filename}</label>
                     </div>
-                    <div className="input-group-append">
-                        <button className="btn btn-outline-primary" type="submit" onClick={handleResult}>Submit</button>
-                    </div>
                 </div>
 
                 <Progress percentage={uploadPercentage} />
+
+                <button className="btn btn-outline-primary" type="submit" onClick={handleResult}>Submit</button>
+
             </form>
             <div id='finalResult' style={{display: "none"}}>
                 <Report loading={loading} />
