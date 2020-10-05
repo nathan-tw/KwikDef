@@ -17,7 +17,7 @@ func main() {
 
 	r.Use(cors.Default())
 
-	r.POST("/upload", apis.FileUploader)
+	r.POST("/file/submit", apis.FileUploader)
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "hello",
