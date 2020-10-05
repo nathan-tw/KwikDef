@@ -32,11 +32,10 @@ const FileUploader = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-
-        const res = await axios.post('http://localhost:8080/file/submit', formData, {
+        const res_test = await axios.get('http://140.119.19.46:8080/')
+        const res = await axios.post('http://140.119.19.46:8080/file/submit', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'MD5': 'slji'
             },
             onUploadProgress: ProgressEvent => {
                 setUploadPercentage(parseInt(Math.round(ProgressEvent.loaded * 100 /
@@ -46,11 +45,10 @@ const FileUploader = () => {
                 // Clear percentage
                 setTimeout(() => setUploadPercentage(0), 10000);
             }
-            
+
 
 
         });
-
         setLoading(false);
 
         setMessage('File is already uploaded')

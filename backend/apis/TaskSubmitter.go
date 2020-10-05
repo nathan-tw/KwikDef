@@ -1,24 +1,50 @@
 package apis
 
 import (
+	"io/ioutil"
 	"io"
 	"mime/multipart"
 	"net/http"
+	"fmt"
 	"bytes"
 )
 
-func TaskSubmitter(file *multipart.FileHeader) io.ReadCloser {
-	REST_URL := "http://localhost:8090/tasks/create/file"
-	f, _ := file.Open()
+func TaskSubmitter(fh *multipart.FileHeader) string {
+	REST_URL := "http://140.119.19.46:8090/tasks/create/file"
+	f, err := fh.Open()
+	if err != nil {
+		panic("error when open file")
+	}
 	bodyBuf := &bytes.Buffer{}                                                                                                                   
-	bodyWriter := multipart.NewWriter(bodyBuf)                                                                                                   
-	fileWriter, _ := bodyWriter.CreateFormFile("file", "test")                                                                                   
-	_, _ = io.Copy(fileWriter, f)                                                                                                                
+	bodyWriter := multipart.NewWriter(bodyBuf)  
+	md5 := HashComputer(fh)
+	fmt.Println(md5)
+	fileWriter, err := bodyWriter.CreateFormFile("file", md5)  
+	if err != nil {
+		panic("error when create form file")
+	}                                                                                
+	_, err = io.Copy(fileWriter, f)
+	if err != nil{
+		panic("error when copy")
+	}
+	contentType := bodyWriter.FormDataContentType()
+	bodyWriter.Close()
+	req, err := http.NewRequest("POST", REST_URL, bodyBuf)
+	if err != nil {
+		panic("error when make a request")
+	}
+	req.Header.Set("Content-Type", contentType)
+	req.Header.Add("Authorization", "Bearer 1otpa8k6IlPzM2Qu0TLP3g")
+	resp, err := http.DefaultClient.Do(req)
 
-	req, _ := http.NewRequest("POST", REST_URL, bodyBuf)
-	req.Header.Set("Content-Type", "multipart/form-data")
-	req.Header.Add("Authorization", "Bearer wbo4kmKnxvbP6ehTlJZcwQ")
-	resp, _ := http.DefaultClient.Do(req)
-	return resp.Body
+	if err != nil {
+		panic("error when request")
+	}
+
+	bodyBytes, _ := ioutil.ReadAll(resp.Body)
+
+	return string(bodyBytes)
+
+
 
 }
