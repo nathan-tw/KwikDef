@@ -25,11 +25,11 @@ services:
       - ./frontend:/app
       - /app/node_modules
 
-  postgres:
-    image: postgres:latest
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: ilove163
+  # postgres:
+  #   image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: ilove163
   # nginx:
   #     depends_on:
   #         - api

@@ -4,12 +4,10 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
-	"fmt"
 	"bytes"
-	"io/ioutil"
 )
 
-func TaskSubmitter(file *multipart.FileHeader) {
+func TaskSubmitter(file *multipart.FileHeader) io.ReadCloser {
 	REST_URL := "http://localhost:8090/tasks/create/file"
 	f, _ := file.Open()
 	bodyBuf := &bytes.Buffer{}                                                                                                                   
@@ -21,8 +19,6 @@ func TaskSubmitter(file *multipart.FileHeader) {
 	req.Header.Set("Content-Type", "multipart/form-data")
 	req.Header.Add("Authorization", "Bearer wbo4kmKnxvbP6ehTlJZcwQ")
 	resp, _ := http.DefaultClient.Do(req)
-	bodyBytes, _ := ioutil.ReadAll(resp.Body)
-	bodyString := string(bodyBytes)
-	fmt.Println(bodyString)
+	return resp.Body
 
 }
