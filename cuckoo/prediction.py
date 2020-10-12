@@ -1,6 +1,3 @@
-
-
-
 #functions
 import csv
 import os
