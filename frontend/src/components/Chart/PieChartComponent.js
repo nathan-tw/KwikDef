@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import test from "../../test_form.json"
-import CanvasJSReact from './canvasjs.react';
+import CanvasJSReact from '../../canvasjs.react.js';
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -37,7 +36,7 @@ class PieChartComponent extends Component{
 	
 	componentDidMount(){
 		var chart = this.chart;
-		fetch(test)
+		fetch('/frontend/src/api/test_form.json')
 		.then(function(response) {
 			return response.json();
 		})
@@ -52,3 +51,4 @@ class PieChartComponent extends Component{
 		});
 	}
 }
+export default PieChartComponent
