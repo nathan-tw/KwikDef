@@ -47,10 +47,10 @@ function Index() {
         <IndexHeader />
         <div className="main">
           <Submit />
-          <PieChartComponent />
+          {/* <Navbars /> */}
           {/* <Images />
           <BasicElements />
-          <Navbars />
+          
           <Tabs />
           <Pagination />
           <Notifications />

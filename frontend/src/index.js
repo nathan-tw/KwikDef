@@ -29,6 +29,7 @@ import Index from "views/Index.js";
 import NucleoIcons from "views/NucleoIcons.js";
 import LoginPage from "views/examples/LoginPage.js";
 import LandingPage from "views/examples/LandingPage.js";
+import ReportPage from "views/examples/ReportPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 
 ReactDOM.render(
@@ -51,6 +52,10 @@ ReactDOM.render(
         <Route
           path="/login-page"
           render={(props) => <LoginPage {...props} />}
+        />
+        <Route
+          path="/reports-page"
+          render={(props) => <ReportPage {...props} />}
         />
         <Redirect to="/index" />
         <Redirect from="/" to="/index" />
