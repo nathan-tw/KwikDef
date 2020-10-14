@@ -15,7 +15,7 @@ function ChartPage() {
       <div className="section section-about-us">
         <div className="container">
           <AttTypePieChart />
-          <FamilyPieChart/>
+          {/* <FamilyPieChart/> */}
         </div>
       </div>
     </>
