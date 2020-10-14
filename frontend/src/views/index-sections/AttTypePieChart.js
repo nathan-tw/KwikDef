@@ -43,7 +43,7 @@ function AttTypePieChart() {
     fetchData();
   }, []);
 
-  return <Doughnut data={data} />;
+  return <Doughnut data={data} height={300}/>;
 }
 
 export default AttTypePieChart;

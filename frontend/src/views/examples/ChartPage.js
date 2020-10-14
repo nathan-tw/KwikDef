@@ -2,8 +2,9 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
 import React from "react";
 
 // reactstrap components
-import { Container, Table } from "reactstrap";
+import { Container, Row, Col, Table } from "reactstrap";
 import FamilyPieChart from "views/index-sections/FamilyPieChart copy";
+import ReportTable from "views/index-sections/ReportTable";
 
 // core components
 import AttTypePieChart from "../index-sections/AttTypePieChart";
@@ -13,10 +14,20 @@ function ChartPage() {
     <>
       <ExamplesNavbar />
       <div className="section section-about-us">
-        <div className="container">
-          <AttTypePieChart />
-          {/* <FamilyPieChart/> */}
-        </div>
+        <Container>
+          <h2>Analysis Report</h2>
+          <ReportTable/>
+          <Row>
+            <Col>
+              <h4>Attact Type</h4>
+              <AttTypePieChart />
+            </Col>
+            <Col>
+              <h4>Family Type</h4>
+              <FamilyPieChart />
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

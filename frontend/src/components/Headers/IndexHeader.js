@@ -37,7 +37,7 @@ function IndexHeader() {
             <img
               alt="..."
               className="n-logo"
-              src={require("assets/img/logo.png")}
+              src={require("assets/img/logo_new2.png")}
             ></img>
             <h2>人工智慧惡意程式偵測系統</h2>
           </div>
