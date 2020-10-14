@@ -31,6 +31,7 @@ import LoginPage from "views/examples/LoginPage.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ReportPage from "views/examples/ReportPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
+import ChartPage from 'views/examples/ChartPage.js';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -56,6 +57,10 @@ ReactDOM.render(
         <Route
           path="/reports-page"
           render={(props) => <ReportPage {...props} />}
+        />
+        <Route
+          path="/chart-page/test"
+          render={(props) => <ChartPage {...props} />}
         />
         <Redirect to="/index" />
         <Redirect from="/" to="/index" />

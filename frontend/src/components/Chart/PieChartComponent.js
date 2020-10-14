@@ -1,54 +1,29 @@
-import React, { Component } from 'react'
-import CanvasJSReact from '../../canvasjs.react.js';
-//var CanvasJSReact = require('./canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import React, { useState } from "react";
+import { PieChart } from "react-minimal-pie-chart";
+import axios from "axios";
 
-var dataPoints =[];
-class PieChartComponent extends Component{
-  render() {	
-		const options = {
-			exportEnabled: true,
-			animationEnabled: true,
-			title: {
-				text: "Malware"
-			},
-			data: [{
-				type: "pie",
-				startAngle: 75,
-				toolTipContent: "<b>{label}</b>: {y}%",
-				showInLegend: "true",
-				// legendText: "{label}",
-				// indexLabelFontSize: 16,
-				// indexLabel: "{label} - {y}%",
-				dataPoints: dataPoints
-			}]
-		}
-		return (
-		<div>
-			<CanvasJSChart options = {options} 
-				 onRef={ref => this.chart = ref}
-			/>
-			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-		</div>
-		);
-	}
-	
-	componentDidMount(){
-		var chart = this.chart;
-		fetch('/frontend/src/api/test_form.json')
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(data) {
-			for (var i = 0; i < data[3]; i++) {
-				dataPoints.push({
-					Attack_Type: test[3],
-					vaue: test[3].value
-				});
-			}
-			chart.render();
-		});
-	}
+function PieChartComponent() {
+  const [data, setData] = useState([]);
+  axios.get("/test_form.json").then((res) => {
+    const json = res.data;
+    json.forEach((obj) => {
+      Object.entries(obj).forEach(([key, value]) => {
+        console.log(`${key} ${value}`);
+      });
+    });
+  });
+
+  return (
+    <PieChart
+      data={[
+        { title: "One", value: 10, color: "#E38627" },
+        { title: "Two", value: 15, color: "#C13C37" },
+        { title: "Three", value: 20, color: "#6A2135" },
+      ]}
+      lineWidth={50}
+      radius={10}
+    />
+  );
 }
-export default PieChartComponent
+
+export default PieChartComponent;
