@@ -14,7 +14,7 @@ function ChartPage() {
       <ExamplesNavbar />
       <div className="section section-about-us">
         <div className="container">
-          {/* <AttTypePieChart /> */}
+          <AttTypePieChart />
           <FamilyPieChart/>
         </div>
       </div>

@@ -81,7 +81,7 @@ function IndexNavbar() {
             navbar
           >
             <Nav navbar>
-              <NavItem>
+            <NavItem>
                 <NavLink
                   href="#pablo"
                   onClick={(e) => {
@@ -93,6 +93,12 @@ function IndexNavbar() {
                 >
                   <i className="now-ui-icons media-1_button-play"></i>
                   <p>Getting start</p>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/reports-page" tag={Link}>
+                  <i className="now-ui-icons files_single-copy-04"></i>
+                  <p>Report List</p>
                 </NavLink>
               </NavItem>
               <NavItem>

@@ -39,6 +39,7 @@ function AttTypePieChart() {
       animate={true}
       animationDuration={300}
       animationEasing={'ease-out'}
+      viewBoxSize={[150, 150]}
       
     />
   );
