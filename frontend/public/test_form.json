@@ -2,7 +2,7 @@
     "Task_ID":111,    
     "Malicious":true,  
     "Att_type":
-        [    
+        {    
             "Adware":0.056930546,       
             "Backdoor":0.057067364,        
             "BrowserModifier":0.057203438,        
@@ -19,7 +19,7 @@
             "VirTool":0.057008594,        
             "Virus":0.05832799,       
             "Worm":0.057027597
-        ],
+        },
     "Family":
         {       
             "Allaple":0.059267085,        

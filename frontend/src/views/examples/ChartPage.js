@@ -3,9 +3,10 @@ import React from "react";
 
 // reactstrap components
 import { Container, Table } from "reactstrap";
+import FamilyPieChart from "views/index-sections/FamilyPieChart copy";
 
 // core components
-import PieChartComponent from "../../components/Chart/PieChartComponent";
+import AttTypePieChart from "../index-sections/AttTypePieChart";
 
 function ChartPage() {
   return (
@@ -13,7 +14,8 @@ function ChartPage() {
       <ExamplesNavbar />
       <div className="section section-about-us">
         <div className="container">
-          <PieChartComponent />
+          {/* <AttTypePieChart /> */}
+          <FamilyPieChart/>
         </div>
       </div>
     </>
