@@ -19,15 +19,16 @@ Since we are in development stage, nginx server are not done yet. Todo list will
 
 - <del> fileUploader
 - <del> hashComputer
-- reportGenerator
-- cuckooSubmitter
+- <del> reportGenerator
+- <del> cuckooSubmitter
 - modelPredictor
 
 ### frontend
 
-- welcomePage
-- submitPage
-- reportPage
+- <del> welcomePage
+- <del> submitPage
+- <del> reportPage
+- chartPage
 
 ### database
 
