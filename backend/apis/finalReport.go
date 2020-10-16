@@ -2,14 +2,14 @@ package apis
 
 
 type FinalReport struct {
-	Malicious bool    `json:"malicious"`
-	Att_type  AttType `json:"att_type"`
+	MD5 bool    `json:"MD5"`
+	Att_type  AttType `json:"Att_type"`
 	Family    Family
 }
 
 type AttType struct {
-	Worm  int `json:"worm"`
-	Virus int `json:"virus"`
+	Adware  int `json:"Adware"`
+	Backdoor int `json:"Backdoor"`
 }
 
 type Family struct {
