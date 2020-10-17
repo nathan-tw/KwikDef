@@ -2,7 +2,7 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
 import React from "react";
 
 // reactstrap components
-import { Container, Row, Col, Table } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import FamilyPieChart from "views/index-sections/FamilyPieChart copy";
 import ReportTable from "views/index-sections/ReportTable";
 
