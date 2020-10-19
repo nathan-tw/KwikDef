@@ -58,7 +58,7 @@ const FileUploader = () => {
 
     return (
         <Fragment>
-            {message ? <Message msg={message} /> : null}
+            {/* {message ? <Message msg={message} /> : null} */}
             <form onSubmit={onSubmit}>
                 <div className="input-group is-invalid my-3">
                     <div className="custom-file">
