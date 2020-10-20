@@ -1,18 +1,19 @@
-package database
+package main
 
 import (
-	"os"
+	// "os"
 	"fmt"
 	"database/sql"
+	_ "github.com/lib/pq"
 )
 
-var (
+const (
     // Initialize connection constants.
-    HOST     = os.Getenv("PGHOST")
-    DATABASE = os.Getenv("PGDATABASE")
-    USER     = os.Getenv("PGUSER")
-    PASSWORD = os.Getenv("PGPASSWORD")
-	PORT = os.Getenv("PGPORT")
+	HOST     = "127.0.0.1"
+	PORT     = 5432
+    DATABASE = "postgres"
+    USER     = "postgres"
+    PASSWORD = "ilove163"
 )
 
 func checkError(err error) {
@@ -21,8 +22,8 @@ func checkError(err error) {
     }
 }
 
-func NewPostgresClient(md5_hash string) {
-	connectionString := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=require", HOST, USER, PASSWORD, DATABASE)
+func main() {
+	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", HOST, PORT, USER, PASSWORD, DATABASE)
 	db, err := sql.Open("postgres", connectionString)
 	checkError(err)
 
@@ -31,7 +32,8 @@ func NewPostgresClient(md5_hash string) {
 	checkError(err)
 	fmt.Println("Successfully created connection to database")
 	
-	sql_statement := "INSERT INTO hashfiles (hash) VALUES ($1);"
-    _, err = db.Exec(sql_statement, md5_hash)
-
+	sql_statement := "INSERT INTO dynamic_prediction (md5, size, malicious) VALUES ($1, $2, $3);"
+	_, err = db.Exec(sql_statement, "goij346246jlj574t3ipow34058", 0.0234, 0.8)
+	checkError(err)
+	fmt.Println("Inserted 1 row of data")
 }

@@ -18,18 +18,18 @@ services:
     build:
       context: ./frontend
     ports:
-      - "140.119.19.46:3000:3000"
+      - "3000:3000"
     # container_name: react-ui
     stdin_open: true
     volumes:
       - ./frontend:/app
       - /app/node_modules
 
-  # postgres:
-  #   image: postgres:latest
-  #   restart: always
-  #   environment:
-  #     POSTGRES_PASSWORD: ilove163
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ilove163
   # nginx:
   #     depends_on:
   #         - api
