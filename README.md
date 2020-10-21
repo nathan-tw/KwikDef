@@ -22,6 +22,7 @@ Todo list will be done in following days respectively before December. React-app
 - reportGenerator
 - cuckooSubmitter
 - modelPredictor
+- databaseConnector
 
 ### frontend
 
@@ -31,9 +32,14 @@ Todo list will be done in following days respectively before December. React-app
 
 ### database
 
-- Postgresql
+- <del> Postgresql
 
 ### models
 
 - <del> static
 - <del> dynamic
+
+### worker
+
+- reportRequester
+- featureSender

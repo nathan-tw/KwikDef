@@ -1,4 +1,4 @@
-package main
+package postgres
 
 import (
 	// "os"
@@ -22,7 +22,7 @@ func checkError(err error) {
     }
 }
 
-func main() {
+func storePrediction(MD5 string, size float64, malicious float64 ) {
 	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", HOST, PORT, USER, PASSWORD, DATABASE)
 	db, err := sql.Open("postgres", connectionString)
 	checkError(err)
@@ -33,7 +33,23 @@ func main() {
 	fmt.Println("Successfully created connection to database")
 	
 	sql_statement := "INSERT INTO dynamic_prediction (md5, size, malicious) VALUES ($1, $2, $3);"
-	_, err = db.Exec(sql_statement, "goij346246jlj574t3ipow34058", 0.0234, 0.8)
+	_, err = db.Exec(sql_statement, MD5, size, malicious)
 	checkError(err)
 	fmt.Println("Inserted 1 row of data")
+}
+
+func searchPrediction(MD5 string) {
+	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", HOST, PORT, USER, PASSWORD, DATABASE)
+	db, err := sql.Open("postgres", connectionString)
+	checkError(err)
+
+	//test
+	err = db.Ping()
+	checkError(err)
+	fmt.Println("Successfully created connection to database")
+	
+	sql_statement := "SELECT * FROM dynamic_prediction WHERE (md5) VALUES ($1);"
+	_, err = db.Exec(sql_statement, MD5)
+	checkError(err)
+	fmt.Println("Select 1 row of data")
 }
