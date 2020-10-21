@@ -8,6 +8,19 @@ import json
 import tensorflow as tf
 import numpy as np
 
+def RNN():
+    inputs = tf.keras.layers.Input(name='inputs',shape=[100])
+    layer1 = tf.keras.layers.Embedding(305,128, input_length=100)(inputs)
+    lstm1 = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64, return_sequences=True))(layer1)
+    lstm2 = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32, return_sequences=True))(lstm1)
+    lstm3 = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(16))(lstm2)
+    dense1 = tf.keras.layers.Dense(64, activation='tanh')(lstm3)
+    dense2 = tf.keras.layers.Dense(32, activation='tanh')(dense1)
+    dp2 = tf.keras.layers.Dropout(0.5)(dense2)
+    dense3 = tf.keras.layers.Dense(16, name='out_layer', activation='softmax')(dp2)
+    model = tf.keras.models.Model(inputs=inputs,outputs=dense3)
+    return model
+
 def apisequence(file):
     with open(file) as json_file:  
         jsonObj = json.load(json_file)
@@ -110,11 +123,14 @@ def main_function(file, task_id):
     seq = []
     tmp = apisequence(file)
     for each in tmp:
-        seq.append(int(api_dict[each]))
+        try:
+            seq.append(int(api_dict[each]))
+        except:
+            continue
 
     #load models
-    model_type = tf.keras.models.load_model('test_type_model.h5')
-    model_family = tf.keras.models.load_model('test_family_model.h5')
+    model_type = tf.keras.models.load_model('test_type_model.h5', custom_objects={'Functional':RNN()})
+    model_family = tf.keras.models.load_model('test_family_model.h5', custom_objects={'Functional':RNN()})
 
     #pad sequences
     predict_seq = pad_x(seq[:1])
@@ -132,5 +148,5 @@ def main_function(file, task_id):
     return report
 
 
-main_function('a097781031738758dbf6fa7af0104980.json', 5)
+report = main_function('a097781031738758dbf6fa7af0104980.json', 5)
 print(report)
