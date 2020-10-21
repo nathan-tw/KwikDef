@@ -10,7 +10,7 @@
 ```zsh
 docker-compose up
 ```
-Since we are in development stage, nginx server are not done yet. Todo list will be done in following days respectively before December. React-app is listening on port 3000 and go-server on port 8080 as well. Just check if two of them are not occupied and visit ```localhost:3000``` is good to go.
+Todo list will be done in following days respectively before December. React-app is listening on port 3000 and go-server on port 8080 as well. Just check if two of them are not occupied and visit ```localhost:3000``` is good to go.
 
 
 ## todo 
@@ -25,19 +25,15 @@ Since we are in development stage, nginx server are not done yet. Todo list will
 
 ### frontend
 
-- welcomePage
-- submitPage
-- reportPage
+- <del> welcomePage
+- <del> submitPage
+- <del> reportPage
 
 ### database
 
 - Postgresql
 
-### routing server
-
-- nginx
-
 ### models
 
-- static
-- dynamic
+- <del> static
+- <del> dynamic

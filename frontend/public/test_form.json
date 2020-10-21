@@ -1,0 +1,43 @@
+{  
+    "MD5":"goij346246jlj574t3ipow34058",    
+    "Malicious":true,  
+    "Att_type":
+        {    
+            "Adware":0.056930546,       
+            "Backdoor":0.057067364,        
+            "BrowserModifier":0.057203438,        
+            "Others":0.14098744,        
+            "PUA":0.05756925,        
+            "PWS":0.056955878,        
+            "Ransom":0.05691602,        
+            "Rogue":0.056919917,        
+            "SoftwareBundler":0.057022657,       
+            "Trojan":0.059114408,   
+            "TrojanDownloader":0.057018526,        
+            "TrojanDropper":0.057000257,       
+            "TrojanSpy":0.05693011,      
+            "VirTool":0.057008594,        
+            "Virus":0.05832799,       
+            "Worm":0.057027597
+        },
+    "Family":
+        {       
+            "Allaple":0.059267085,        
+            "Dinwod":0.058444884,      
+            "Gamarue":0.058446426,       
+            "Ludbaruma":0.058444988,        
+            "Mira":0.058534373,    
+            "Others":0.088916615,      
+            "Parite":0.059508473,        
+            "Ramnit":0.059487086,        
+            "Sality":0.07348146,        
+            "Shodi":0.05852551,        
+            "Upatre":0.061711013,        
+            "VB":0.05884003,        
+            "Virut":0.064738035,        
+            "Vobfus":0.05854088,        
+            "Wacatac":0.06470515,        
+            "Yuner":0.05840797    
+        }
+}
+

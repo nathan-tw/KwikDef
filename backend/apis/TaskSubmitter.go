@@ -9,7 +9,7 @@ import (
 	"bytes"
 )
 
-func TaskSubmitter(fh *multipart.FileHeader) string {
+func TaskSubmitter(fh *multipart.FileHeader) []byte {
 	REST_URL := "http://140.119.19.46:8090/tasks/create/file"
 	f, err := fh.Open()
 	if err != nil {
@@ -43,7 +43,7 @@ func TaskSubmitter(fh *multipart.FileHeader) string {
 
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
-	return string(bodyBytes)
+	return bodyBytes
 
 
 
