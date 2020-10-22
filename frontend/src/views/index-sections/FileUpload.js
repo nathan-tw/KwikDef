@@ -2,16 +2,16 @@ import React, { Fragment, useState } from "react";
 import Progress from "./Progress";
 import axios from "axios";
 import {
-  Input,
-  Alert,
-  Container,
-  Row,
-  Col,
-  Form,
-  FormText,
-  Label,
-  FormGroup,
-  Button,
+    Input,
+    Alert,
+    Container,
+    Row,
+    Col,
+    Form,
+    FormText,
+    Label,
+    FormGroup,
+    Button,
 } from "reactstrap";
 
 const FileUploader = () => {
@@ -45,20 +45,18 @@ const FileUploader = () => {
 
                 // Clear percentage
                 setTimeout(() => setUploadPercentage(0), 10000);
+                setMessage('File is already uploaded');
             }
-
-
-
         });
-        setLoading(false);
 
-        setMessage('File is already uploaded')
+
 
     }
 
     return (
         <Fragment>
             {/* {message ? <Message msg={message} /> : null} */}
+            {/* {message ? <Alert>{message}</Alert> : null} */}
             <form onSubmit={onSubmit}>
                 <div className="input-group is-invalid my-3">
                     <div className="custom-file">
