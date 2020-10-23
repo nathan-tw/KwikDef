@@ -25,7 +25,7 @@ function Submit() {
                 本系統採用惡意程式動、靜態分析與機器學習技術。由於動態分析需要於沙盒中進行且耗時較久，我們提供使用者較彈性的選擇，根據不同需求使用者可以選擇靜態快篩或動態分析。
               </h4>
             </Col>
-            <Col md="12">
+            <Col className="ml-auto mr-auto" md="8">
               <FileUploader/>
             </Col>
           </Row>
