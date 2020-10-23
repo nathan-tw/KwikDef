@@ -32,7 +32,6 @@ import LandingPage from "views/examples/LandingPage.js";
 import ReportPage from "views/examples/ReportPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import ChartPage from 'views/examples/ChartPage.js';
-import Storage from 'views/index-sections/Storage.js';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -62,10 +61,6 @@ ReactDOM.render(
         <Route
           path="/chart-page/test"
           render={(props) => <ChartPage {...props} />}
-        />
-        <Route
-          path="/storage-page"
-          render={(props) => <Storage {...props} />}
         />
         <Redirect to="/index" />
         <Redirect from="/" to="/index" />
