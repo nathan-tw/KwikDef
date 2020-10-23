@@ -45,9 +45,10 @@ const FileUploader = () => {
 
                 // Clear percentage
                 setTimeout(() => setUploadPercentage(0), 10000);
-                setMessage('File is already uploaded');
+                setMessage('File is already uploaded, you can now check it in report page');
             }
         });
+        localStorage.setItem(filename, res.data.md5)
 
 
 
@@ -56,7 +57,24 @@ const FileUploader = () => {
     return (
         <Fragment>
             {/* {message ? <Message msg={message} /> : null} */}
-            {/* {message ? <Alert>{message}</Alert> : null} */}
+            {message ? <Alert color="info">
+                <Container>
+                    <div className="alert-icon">
+                        <i className="now-ui-icons travel_info"></i>
+                    </div>
+                    <strong>Done! </strong>
+                    {message}
+                    <button
+                        type="button"
+                        className="close"
+                        onClick={() => setMessage("")}
+                    >
+                        <span aria-hidden="true">
+                            <i className="now-ui-icons ui-1_simple-remove"></i>
+                        </span>
+                    </button>
+                </Container>
+            </Alert> : null}
             <form onSubmit={onSubmit}>
                 <div className="input-group is-invalid my-3">
                     <div className="custom-file">

@@ -17,7 +17,7 @@ func FileUploader(ctx *gin.Context) {
 		})
 	}
 
-	// hash := HashComputer(file)
+	hash := HashComputer(file)
 
 	// jsonFile, _ := os.Open("/home/nathan/workspace/KwikDef/backend/apis/fake_predict.json")
 	// jsonByte, _ := ioutil.ReadAll(jsonFile)
@@ -26,8 +26,10 @@ func FileUploader(ctx *gin.Context) {
 	
 	
 
-	respBody := TaskSubmitter(file)
-	ctx.JSON(http.StatusOK, respBody)
+	//respBody := TaskSubmitter(file)
+	ctx.JSON(http.StatusOK, gin.H{
+		"md5": hash,
+	})
 
 
 	ctx.Next()
