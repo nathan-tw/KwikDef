@@ -11,6 +11,7 @@ import(
 
 func FileUploader(ctx *gin.Context) {
 	file, err := ctx.FormFile("file")
+	analysisType := ctx.PostForm("analysisType")
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
@@ -29,6 +30,7 @@ func FileUploader(ctx *gin.Context) {
 	//respBody := TaskSubmitter(file)
 	ctx.JSON(http.StatusOK, gin.H{
 		"md5": hash,
+		"analysisType": analysisType,
 	})
 
 

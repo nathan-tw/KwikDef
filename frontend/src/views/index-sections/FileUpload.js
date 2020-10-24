@@ -30,8 +30,14 @@ const FileUploader = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    let analysisType = document.getElementById("analysisType").value;
-    console.log(analysisType);
+    const analysisTypes = document.getElementsByName("analysisType");
+    let analysisType = "";
+    analysisTypes.forEach(elem=>{
+      if (elem.checked) {
+        analysisType = elem.value
+      }
+    })
+    formData.append("analysisType", analysisType)
     const res = await axios.post(
       "http://localhost:8080/file/submit",
       formData,
@@ -86,7 +92,7 @@ const FileUploader = () => {
         <FormGroup check className="form-check-radio">
           <Label check>
             <Input
-              defaultValue="option1"
+              value="static"
               id="analysisType"
               name="analysisType"
               type="radio"
@@ -99,11 +105,10 @@ const FileUploader = () => {
           <Label check>
             <Input
               defaultChecked
-              defaultValue="option2"
               id="analysisType"
               name="analysisType"
               type="radio"
-              value=""
+              value="dynamic"
             ></Input>
             <span className="form-check-sign"></span>
             深度動靜態分析
