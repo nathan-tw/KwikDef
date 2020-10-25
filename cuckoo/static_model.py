@@ -16,10 +16,10 @@ def contain_symbol(keyword):
   else:
       return False
 
-def parse_pe(path):
+def parse_pe(file):
   api_call = []
   api_seq = []
-  pef = pefile.PE(path)
+  pef = pefile.PE(data=file)
   for entry in pef.DIRECTORY_ENTRY_IMPORT:
     for API in entry.imports:
       name = API.name.decode('UTF-8')
@@ -39,8 +39,8 @@ def parse_pe(path):
     ret_val = ret_val + str(each) + '/'
   return ret_val[:-1]
 
-def pe_info(path):
-  pef = pefile.PE(path)
+def pe_info(file):
+  pef = pefile.PE(data=file)
   sec = pef.sections
   dll = pef.DIRECTORY_ENTRY_IMPORT
   return sec,dll
@@ -58,9 +58,7 @@ def pad(seq):
           ret_val.append(1)
   return ret_val
 
-def grayscale_image(path):
-  with open(path, 'rb') as binary_file:
-    data = binary_file.read()
+def grayscale_image(data):
   data_len = len(data)
   d = np.frombuffer(data, dtype=np.uint8)
   sqrt_len = int(ceil(sqrt(data_len)))
@@ -71,9 +69,9 @@ def grayscale_image(path):
   
   return im
 
-def report_generator(number, pred, sec, dll, img):
+def report_generator(task_id, pred, sec, dll, img):
   jobj = {
-    'Task_ID':number,
+    'Task_ID':task_id,
     'Result':
     {
       'Malicious':pred[0][0]
@@ -102,9 +100,9 @@ api_dict = {}
 for i in range(len(api_list)):
   api_dict.update({api_list[i]: int})
 
-def main_function(path):
+def main_function(file, task_id):
   try:
-    import_api = parse_pe(path)
+    import_api = parse_pe(file)
   except:
     return 'Not PE file'
 
@@ -116,13 +114,12 @@ def main_function(path):
     else:
       seq_dict.update({api_list[i]:0})
   seq_pd = pd.DataFrame(seq_dict,index=[0])
-  sec,dll = pe_info(path)
-  img = grayscale_image(path)
+  sec,dll = pe_info(file)
+  img = grayscale_image(file)
 
   pickle_in = open('XGB.pickle','rb')
   XGB = pickle.load(pickle_in)
   pred = XGB.predict_proba(seq_pd)
 
-  ret_val = report_generator(1, pred, top10, sec, dll, img)
+  ret_val = report_generator(task_id, pred, sec, dll, img)
   return ret_val
-

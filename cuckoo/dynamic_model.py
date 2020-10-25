@@ -115,7 +115,6 @@ def main_function(file, task_id):
     dict_type = {0:'Adware',1:'Backdoor',2:'BrowserModifier',3:'Others',4:'PUA',5:'PWS',6:'Ransom',7:'Rogue',8:'SoftwareBundler',9:'Trojan',10:'TrojanDownloader',11:'TrojanDropper',12:'TrojanSpy',13:'VirTool',14:'Virus',15:'Worm'}
     dict_family = {0:'Allaple',1:'Dinwod',2:'Gamarue',3:'Ludbaruma',4:'Mira',5:'Others',6:'Parite',7:'Ramnit',8:'Sality',9:'Shodi',10:'Upatre',11:'VB',12:'Virut',13:'Vobfus',14:'Wacatac',15:'Yuner'}
 
-    
     #parse api sequence
     seq = []
     tmp = apisequence(file)
