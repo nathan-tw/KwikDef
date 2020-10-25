@@ -17,17 +17,17 @@ func FileUploader(ctx *gin.Context) {
 			"error": err,
 		})
 	}
-
+	if analysisType == "static" {
+		// call static model
+	} else {
+		// taskId (type: []byte) := TaskSubmitter(file)
+		// add task to worker
+	}
 	hash := HashComputer(file)
-
-	// jsonFile, _ := os.Open("/home/nathan/workspace/KwikDef/backend/apis/fake_predict.json")
-	// jsonByte, _ := ioutil.ReadAll(jsonFile)
-	// var finalReport FinalReport
-	// json.Unmarshal(jsonByte, &finalReport)
 	
 	
 
-	//respBody := TaskSubmitter(file)
+	
 	ctx.JSON(http.StatusOK, gin.H{
 		"md5": hash,
 		"analysisType": analysisType,
