@@ -7,13 +7,13 @@ ALLOWED_EXTENSIONS = {'json'}
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'Hello, World!'
+    return {'Hello, World!'}
 
 
 @app.route('/predict/dynamic', methods=['POST'])
 def uploadDynamic():
     file = request.files['file']
-    return 'Hello, World1'
+    return file
 
 @app.route('/predict/static', method=['POST'])
 def uploadStatic():

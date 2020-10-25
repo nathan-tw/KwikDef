@@ -69,9 +69,9 @@ def grayscale_image(data):
   
   return im
 
-def report_generator(task_id, pred, sec, dll, img):
+def report_generator(md5, pred, sec, dll, img):
   jobj = {
-    'Task_ID':task_id,
+    'MD5':md5,
     'Result':
     {
       'Malicious':pred[0][0]
@@ -100,7 +100,7 @@ api_dict = {}
 for i in range(len(api_list)):
   api_dict.update({api_list[i]: int})
 
-def main_function(file, task_id):
+def static_main(file, md5):
   try:
     import_api = parse_pe(file)
   except:
@@ -121,5 +121,5 @@ def main_function(file, task_id):
   XGB = pickle.load(pickle_in)
   pred = XGB.predict_proba(seq_pd)
 
-  ret_val = report_generator(task_id, pred, sec, dll, img)
+  ret_val = report_generator(md5, pred, sec, dll, img)
   return ret_val
