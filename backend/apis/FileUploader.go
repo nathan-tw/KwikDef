@@ -16,18 +16,32 @@ func FileUploader(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
+		ctx.Next()
+		return
+	}
+	f, err := file.Open()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+		})
+		ctx.Next()
+		return
 	}
 
 	hash := HashComputer(file)
 
-	// jsonFile, _ := os.Open("/home/nathan/workspace/KwikDef/backend/apis/fake_predict.json")
-	// jsonByte, _ := ioutil.ReadAll(jsonFile)
-	// var finalReport FinalReport
-	// json.Unmarshal(jsonByte, &finalReport)
+	if analysisType == "static" {
+		// call static model
+		http.Post("api/url", "multipart/form-data", f)
+	} else {
+		// taskId (type: []byte) := DynamicTaskSubmitter(file)
+		// add task to worker
+	}
+	
 	
 	
 
-	//respBody := TaskSubmitter(file)
+	
 	ctx.JSON(http.StatusOK, gin.H{
 		"md5": hash,
 		"analysisType": analysisType,

@@ -5,11 +5,10 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
-	"fmt"
 	"bytes"
 )
 
-func TaskSubmitter(fh *multipart.FileHeader) []byte {
+func DynamicTaskSubmitter(fh *multipart.FileHeader) []byte {
 	REST_URL := "http://140.119.19.46:8090/tasks/create/file"
 	f, err := fh.Open()
 	if err != nil {
@@ -18,7 +17,6 @@ func TaskSubmitter(fh *multipart.FileHeader) []byte {
 	bodyBuf := &bytes.Buffer{}                                                                                                                   
 	bodyWriter := multipart.NewWriter(bodyBuf)  
 	md5 := HashComputer(fh)
-	fmt.Println(md5)
 	fileWriter, err := bodyWriter.CreateFormFile("file", md5)  
 	if err != nil {
 		panic("error when create form file")
@@ -44,7 +42,8 @@ func TaskSubmitter(fh *multipart.FileHeader) []byte {
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
 	return bodyBytes
+}
 
-
+func StaticTaskSubmitter(fh *multipart.FileHeader) []byte {
 
 }
