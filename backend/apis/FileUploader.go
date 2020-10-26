@@ -29,13 +29,12 @@ func FileUploader(ctx *gin.Context) {
 	}
 	
 	if analysisType == "static" {
-		// call static model
-		http.Post("", "multipart/form-data", f)
+		staticResponse := StaticTaskSubmitter(file) // send to static model
 	} else {
-		// taskId (type: []byte) := TaskSubmitter(file)
+		// taskId (type: []byte) := DynamicTaskSubmitter(file)
 		// add task to worker
 	}
-	hash := HashComputer(file)
+	
 	
 	
 

@@ -15,8 +15,6 @@ def index():
 def uploadDynamic():
     file = request.files['file']
     f = open(file, 'rb')
-    md5
-    jsonReport = static_model.main_function(f, md5)
     return 'Hello, World1'
 
 @app.route('/predict/static', methods=['POST'])

@@ -77,7 +77,7 @@ def report_generator(md5, pred, sec, dll, img):
       'Malicious':pred[0][0]
     },
     'Number_of_Sections':len(sec),
-    'Section':[]
+    'Section':[],
     'DLL':[],
     'Gray_scale':img
   }
