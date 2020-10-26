@@ -77,12 +77,18 @@ def report_generator(md5, pred, sec, dll, img):
       'Malicious':pred[0][0]
     },
     'Number_of_Sections':len(sec),
+    'Section':[]
     'DLL':[],
     'Gray_scale':img
   }
 
   for j in range(len(dll)):
     jobj['DLL'].append(dll[j].dll.decode('utf-8'))
+
+  for i in range(len(sec)):
+    jobj['Sections'].append( {'Name':sec[i].Name.decode('utf-8').rstrip('\x00'), 'Virtual_Address':sec[i].VirtualAddress,
+                  'Virtual_Size':sec[i].Misc_VirtualSize, 'Raw_Size':sec[i].SizeOfRawData, 'Entropy':sec[i].get_entropy(),
+                  'Md5':sec[i].get_hash_md5()} )
   
   return jobj
 
