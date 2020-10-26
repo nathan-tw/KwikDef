@@ -16,9 +16,21 @@ func FileUploader(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
+		ctx.Next()
+		return
 	}
+	f, err := file.Open()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+		})
+		ctx.Next()
+		return
+	}
+	
 	if analysisType == "static" {
 		// call static model
+		http.Post("", "multipart/form-data", f)
 	} else {
 		// taskId (type: []byte) := TaskSubmitter(file)
 		// add task to worker

@@ -69,20 +69,26 @@ def grayscale_image(data):
   
   return im
 
-def report_generator(task_id, pred, sec, dll, img):
+def report_generator(md5, pred, sec, dll, img):
   jobj = {
-    'Task_ID':task_id,
+    'MD5':md5,
     'Result':
     {
       'Malicious':pred[0][0]
     },
     'Number_of_Sections':len(sec),
+    'Section':[]
     'DLL':[],
     'Gray_scale':img
   }
 
   for j in range(len(dll)):
     jobj['DLL'].append(dll[j].dll.decode('utf-8'))
+
+  for i in range(len(sec)):
+    jobj['Sections'].append( {'Name':sec[i].Name.decode('utf-8').rstrip('\x00'), 'Virtual_Address':sec[i].VirtualAddress,
+                  'Virtual_Size':sec[i].Misc_VirtualSize, 'Raw_Size':sec[i].SizeOfRawData, 'Entropy':sec[i].get_entropy(),
+                  'Md5':sec[i].get_hash_md5()} )
   
   return jobj
 
@@ -100,7 +106,7 @@ api_dict = {}
 for i in range(len(api_list)):
   api_dict.update({api_list[i]: int})
 
-def main_function(file, task_id):
+def static_main(file, md5):
   try:
     import_api = parse_pe(file)
   except:
@@ -121,5 +127,5 @@ def main_function(file, task_id):
   XGB = pickle.load(pickle_in)
   pred = XGB.predict_proba(seq_pd)
 
-  ret_val = report_generator(task_id, pred, sec, dll, img)
+  ret_val = report_generator(md5, pred, sec, dll, img)
   return ret_val

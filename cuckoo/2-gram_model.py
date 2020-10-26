@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 import numpy as np
 
@@ -45,7 +46,31 @@ def report_generator(number, result, att_type, family):
     }
     return jobj
 
-def main_function(apiseq:list, task_id:int, static_result:bool):
+def apisequence(file):
+  report_sec_len = len(file['behavior']['processes'])
+  apiCallSequence = []
+  for i in range(report_sec_len):
+    api = [call['api'] for call in file['behavior']['processes'][i]['calls']]
+    apiCallSequence += api
+  return apiCallSequence
+
+def main_function(file, task_id:int, static_result:bool):
+  # create api dict
+  api_dict = {}
+    with open('api_dict.csv', 'r') as csvfile:
+      rows = csv.DictReader(csvfile)
+      for row in rows:
+        api_dict.update({row['api']:row['num']})
+  
+  # parse api sequence
+  apiseq = []
+  file = json.loads(file.decode('utf-8'))
+  tmp = apisequence(file)
+  for each in tmp:
+    try:
+      apiseq.append(int(api_dict[each]))
+    except:
+      continue
 
   # preparing type prediction
   type_model = load_model('16type_model.h5')
@@ -75,4 +100,4 @@ def main_function(apiseq:list, task_id:int, static_result:bool):
   
   # generate report
   report = report_generator(task_id, static_result, att_type, family)
-  return report  
+  return report
