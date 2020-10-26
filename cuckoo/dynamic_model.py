@@ -18,7 +18,7 @@ def RNN():
     model = tf.keras.models.Model(inputs=inputs,outputs=dense3)
     return model
 
-def apisequence(file):
+'''def apisequence(file):
     with open(file) as json_file:  
         jsonObj = json.load(json_file)
         report_sec_len = len(jsonObj['behavior']['processes'])
@@ -26,7 +26,15 @@ def apisequence(file):
         for i in range(report_sec_len):
             api = [call['api'] for call in jsonObj['behavior']['processes'][i]['calls']]
             apiCallSequence += api
-        return apiCallSequence
+        return apiCallSequence'''
+
+def apisequence(file):
+  report_sec_len = len(file['behavior']['processes'])
+  apiCallSequence = []
+  for i in range(report_sec_len):
+      api = [call['api'] for call in file['behavior']['processes'][i]['calls']]
+      apiCallSequence += api
+  return apiCallSequence
 
 def pad_x(seq):
     api = []
@@ -117,6 +125,7 @@ def main_function(file, task_id):
 
     #parse api sequence
     seq = []
+    file = json.loads(file.decode('utf-8'))
     tmp = apisequence(file)
     for each in tmp:
         try:
