@@ -4,7 +4,8 @@ import (
 	// "os"
 	"fmt"
 	"database/sql"
-	_ "github.com/lib/pq"
+	"github.com/lib/pq"
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -38,7 +39,8 @@ func StorePrediction(MD5 string, size float64, malicious float64 ) {
 	fmt.Println("Inserted 1 row of data")
 }
 
-func SearchStaticPrediction(MD5 string) *sql.Rows{
+
+func SearchStaticPrediction(MD5 string) gin.H{
 	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", HOST, PORT, USER, PASSWORD, DATABASE)
 	db, err := sql.Open("postgres", connectionString)
 	checkError(err)
@@ -48,11 +50,23 @@ func SearchStaticPrediction(MD5 string) *sql.Rows{
 	checkError(err)
 	fmt.Println("Successfully created connection to database")
 	
-	sql_statement := "SELECT * FROM static_prediction WHERE (md5) VALUES ($1);"
-	rows, err := db.Query(sql_statement, MD5)
-	checkError(err)
+	var malicious, size float32
+	var number_of_section int
+	var imported_apis, dlls []string
+	
+	// var gray_scale [][]int 
+	sql_statement := "SELECT md5, malicious, size, number_of_section, imported_apis, dlls FROM static_prediction WHERE md5 = $1"
+	row := db.QueryRow(sql_statement, MD5)
 	fmt.Println("Select 1 row of data")
-	err = rows.Err()
+	err = row.Scan(&MD5, &malicious, &size, &number_of_section, pq.Array(&imported_apis), pq.Array(&dlls))
 	checkError(err)
-	return rows
+	result := gin.H{
+		"MD5": MD5,
+		"malicious": malicious,
+		"size": size,
+		"number_of_section": number_of_section,
+		"imported_api": imported_apis,
+		"dlls": dlls,
+	}
+	return result
 }

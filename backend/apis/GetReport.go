@@ -23,6 +23,8 @@ import(
 // }
 
 func GetReport(ctx *gin.Context) {
-	ctx.
-	database.SearchPrediction()
+	hash := ctx.Param("id")
+	result := database.SearchStaticPrediction(hash)
+	ctx.JSON(200, result)
+	ctx.Next()
 }
