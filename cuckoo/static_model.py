@@ -7,6 +7,7 @@ import csv
 import pickle
 import numpy as np
 from math import sqrt, ceil
+from database import store_static_prediction
 
 def contain_symbol(keyword):
   symbols = "~!@#$%^&*()_+-*/<>,.[]\/"
@@ -128,4 +129,6 @@ def static_main(file, md5):
   pred = XGB.predict_proba(seq_pd)
 
   ret_val = report_generator(md5, pred, sec, dll, img)
+  args = [md5, pred[0][0], size, len(sec), ]
+  store_static_prediction()
   return ret_val
