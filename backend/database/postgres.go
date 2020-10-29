@@ -1,4 +1,4 @@
-package postgres
+package database
 
 import (
 	// "os"
@@ -22,7 +22,7 @@ func checkError(err error) {
     }
 }
 
-func storePrediction(MD5 string, size float64, malicious float64 ) {
+func StorePrediction(MD5 string, size float64, malicious float64 ) {
 	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", HOST, PORT, USER, PASSWORD, DATABASE)
 	db, err := sql.Open("postgres", connectionString)
 	checkError(err)
@@ -38,7 +38,7 @@ func storePrediction(MD5 string, size float64, malicious float64 ) {
 	fmt.Println("Inserted 1 row of data")
 }
 
-func searchPrediction(MD5 string) {
+func SearchPrediction(MD5 string) {
 	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", HOST, PORT, USER, PASSWORD, DATABASE)
 	db, err := sql.Open("postgres", connectionString)
 	checkError(err)

@@ -19,7 +19,6 @@ func FileUploader(ctx *gin.Context) {
 		ctx.Next()
 		return
 	}
-	f, err := file.Open()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
@@ -29,14 +28,14 @@ func FileUploader(ctx *gin.Context) {
 	}
 	
 	if analysisType == "static" {
-		staticResponse := StaticTaskSubmitter(file) // send to static model
+		// staticResponse := StaticTaskSubmitter(file) // send to static model
 	} else {
 		// taskId (type: []byte) := DynamicTaskSubmitter(file)
 		// add task to worker
 	}
 	
 	
-	
+	hash := HashComputer(file)
 
 	
 	ctx.JSON(http.StatusOK, gin.H{
