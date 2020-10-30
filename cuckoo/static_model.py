@@ -128,7 +128,11 @@ def static_main(file, md5):
   XGB = pickle.load(pickle_in)
   pred = XGB.predict_proba(seq_pd)
 
-  ret_val = report_generator(md5, pred, sec, dll, img)
-  args = [md5, pred[0][0], size, len(sec), ]
-  store_static_prediction()
-  return ret_val
+
+  # 幫我依序填入要存到db的值，順序可參考database.py被註解的main
+  args = [md5, pred[0][0], size, len(sec), ....]
+  store_static_prediction(args)
+
+  # 不用return了 因為已經存到db
+  # ret_val = report_generator(md5, pred, sec, dll, img)
+  # return ret_val

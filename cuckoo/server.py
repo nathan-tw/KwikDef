@@ -23,5 +23,5 @@ def uploadStatic():
     hash = file.filename
     return 'success'
 
-app.run(host='140.119.19.46')
+app.run()
 
