@@ -20,6 +20,7 @@ def uploadDynamic():
 @app.route('/predict/static', methods=['POST'])
 def uploadStatic():
     file = request.files['file']
+    hash = file.filename
     return 'success'
 
 app.run(host='140.119.19.46')
