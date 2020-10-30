@@ -11,24 +11,36 @@ import(
 
 func FileUploader(ctx *gin.Context) {
 	file, err := ctx.FormFile("file")
+	analysisType := ctx.PostForm("analysisType")
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
+		ctx.Next()
+		return
 	}
-
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+		})
+		ctx.Next()
+		return
+	}
+	
+	if analysisType == "static" {
+		// _ = StaticTaskSubmitter(file) // send to static model
+	} else {
+		// taskId (type: []byte) := DynamicTaskSubmitter(file)
+		// add task to worker
+	}
+	
+	
 	hash := HashComputer(file)
 
-	// jsonFile, _ := os.Open("/home/nathan/workspace/KwikDef/backend/apis/fake_predict.json")
-	// jsonByte, _ := ioutil.ReadAll(jsonFile)
-	// var finalReport FinalReport
-	// json.Unmarshal(jsonByte, &finalReport)
 	
-	
-
-	//respBody := TaskSubmitter(file)
 	ctx.JSON(http.StatusOK, gin.H{
 		"md5": hash,
+		"analysisType": analysisType,
 	})
 
 

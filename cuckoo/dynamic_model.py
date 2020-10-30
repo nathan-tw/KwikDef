@@ -18,7 +18,7 @@ def RNN():
     model = tf.keras.models.Model(inputs=inputs,outputs=dense3)
     return model
 
-def apisequence(file):
+'''def apisequence(file):
     with open(file) as json_file:  
         jsonObj = json.load(json_file)
         report_sec_len = len(jsonObj['behavior']['processes'])
@@ -26,7 +26,15 @@ def apisequence(file):
         for i in range(report_sec_len):
             api = [call['api'] for call in jsonObj['behavior']['processes'][i]['calls']]
             apiCallSequence += api
-        return apiCallSequence
+        return apiCallSequence'''
+
+def apisequence(file):
+  report_sec_len = len(file['behavior']['processes'])
+  apiCallSequence = []
+  for i in range(report_sec_len):
+      api = [call['api'] for call in file['behavior']['processes'][i]['calls']]
+      apiCallSequence += api
+  return apiCallSequence
 
 def pad_x(seq):
     api = []
@@ -115,9 +123,9 @@ def main_function(file, task_id):
     dict_type = {0:'Adware',1:'Backdoor',2:'BrowserModifier',3:'Others',4:'PUA',5:'PWS',6:'Ransom',7:'Rogue',8:'SoftwareBundler',9:'Trojan',10:'TrojanDownloader',11:'TrojanDropper',12:'TrojanSpy',13:'VirTool',14:'Virus',15:'Worm'}
     dict_family = {0:'Allaple',1:'Dinwod',2:'Gamarue',3:'Ludbaruma',4:'Mira',5:'Others',6:'Parite',7:'Ramnit',8:'Sality',9:'Shodi',10:'Upatre',11:'VB',12:'Virut',13:'Vobfus',14:'Wacatac',15:'Yuner'}
 
-    
     #parse api sequence
     seq = []
+    file = json.loads(file.decode('utf-8'))
     tmp = apisequence(file)
     for each in tmp:
         try:

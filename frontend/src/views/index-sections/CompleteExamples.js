@@ -8,17 +8,19 @@ import { Container, Row, Col } from "reactstrap";
 function CompleteExamples() {
   return (
     <>
-      <div className="section">
+      <div className="section" id="aboutus-section">
         <Container className="text-center">
           <Row className="justify-content-md-center">
             <Col lg="8" md="12">
-              <h2 className="title">Completed with examples</h2>
-              <h5 className="description">
-                The kit comes with three pre-built pages to help you get started
-                faster. You can change the text and images and you're good to
-                go. More importantly, looking at them will give you a picture of
-                what you can built with this powerful Bootstrap 4 ui kit.
-              </h5>
+              <h2 className="title">About Us</h2>
+              <h3>KwikDef—人工智慧惡意程式偵測系統</h3>
+              <h4 >
+                本系統採用惡意程式動、靜態分析與機器學習技術，透過分析檔案內容與側錄其在虛擬環境中之實際表現作為檔案特徵進行分析，對未知程式進行偵測及分類，並產生詳細資訊報表，
+                供資安專業人員做進一步的追蹤與研究。
+              </h4>
+              <h4>
+                模型將根據受測檔案的增加定期進行校準、修正，以期能維持偵測準確率。本系統旨在幫助使用者更快速的檢測Windows的可執行檔，提供可靠的檢測評斷。
+              </h4>
             </Col>
           </Row>
         </Container>

@@ -107,7 +107,7 @@ function IndexNavbar() {
                   onClick={(e) => {
                     e.preventDefault();
                     document
-                      .getElementById("submit-section")
+                      .getElementById("aboutus-section")
                       .scrollIntoView();
                   }}
                 >
