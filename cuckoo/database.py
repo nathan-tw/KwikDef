@@ -31,7 +31,11 @@ def store_static_prediction(*args):
 #         'size': 23.4,
 #         'number_of_section': 4,
 #         'dlls': ['23fiou', '2fhuui'],
+<<<<<<< HEAD
 #         'top10_imported_apis': ['23fiou', '2fhuui'],
+=======
+#         'imported_apis': ['23fiou', '2fhuui'],
+>>>>>>> 3282b601fd272064a5427821aaf431350268a5a8
 #         'gray_scale': [[1, 2, 3], [2, 4, 5]]
 #     }
 
