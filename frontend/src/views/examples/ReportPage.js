@@ -8,13 +8,15 @@ import { Container, Table, Button, Alert } from "reactstrap";
 // core components
 
 function ReportsPage() {
+  const [isDone, setIsDone] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
   const [jsonObj, setJsonObj] = useState({});
   const onSubmit = async (e) => {
     const id = e.target.id;
-    const res = await axios.get(`http://localhost:8080/report/${id}`);
+    const res = await axios.get(`http://140.119.19.46:8080/report/${id}`);
     if (res.status === 200) {
-      setJsonObj(res.data)
+      setJsonObj(res.data);
+      setIsDone(true);
     } else {
       setIsFailed(true);
     }
@@ -29,10 +31,10 @@ function ReportsPage() {
 
   return (
     <>
-      {/* {jsonObj ? <Redirect to={{
+      {isDone ? <Redirect to={{
             pathname: "/chart-page/test",
             state: { data: jsonObj }
-          }} /> : null} */}
+          }} /> : null}
       {isFailed ? (
         <Alert color="info">
           <Container>

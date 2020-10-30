@@ -11,7 +11,6 @@ import AttTypePieChart from "../index-sections/AttTypePieChart";
 
 function ChartPage(props) {
   const data = props.location.state.data;
-  console.log(data);
   return (
     <>
       <ExamplesNavbar />

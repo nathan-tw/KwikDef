@@ -28,14 +28,14 @@ const FileUploader = () => {
     formData.append("file", file);
     const analysisTypes = document.getElementsByName("analysisType");
     let analysisType = "";
-    analysisTypes.forEach(elem=>{
+    analysisTypes.forEach(elem => {
       if (elem.checked) {
         analysisType = elem.value
       }
     })
     formData.append("analysisType", analysisType)
     const res = await axios.post(
-      "http://localhost:8080/file/submit",
+      "http://140.119.19.46:8080/file/submit",
       formData,
       {
         headers: {
@@ -53,7 +53,7 @@ const FileUploader = () => {
           setMessage(
             "File is already uploaded, you can now check it in report page"
           );
-          
+
         },
       }
     );
