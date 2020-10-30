@@ -6,7 +6,7 @@ import pandas as pd
 import csv
 import pickle
 import numpy as np
-from math import sqrt, ceil
+from math import sqrt, ceil, pow, floor, log
 from database import store_static_prediction
 
 def contain_symbol(keyword):
@@ -16,6 +16,15 @@ def contain_symbol(keyword):
           return True
   else:
       return False
+
+def convert_size(size_bytes):
+   if size_bytes == 0:
+     return "0B"
+   size_name = ("B", "KB", "MB", "GB")
+   i = int(floor(log(size_bytes, 1024)))
+   p = pow(1024, i)
+   s = round(size_bytes / p, 2)
+   return "%s %s" % (s, size_name[i])
 
 def parse_pe(file):
   api_call = []
@@ -38,7 +47,7 @@ def parse_pe(file):
   ret_val = ''
   for each in api_seq:
     ret_val = ret_val + str(each) + '/'
-  return ret_val[:-1]
+  return ret_val[:-1], api_call
 
 def pe_info(file):
   pef = pefile.PE(data=file)
@@ -109,7 +118,7 @@ for i in range(len(api_list)):
 
 def static_main(file, md5):
   try:
-    import_api = parse_pe(file)
+    import_api, imported_apis = parse_pe(file)
   except:
     return 'Not PE file'
 
@@ -121,16 +130,31 @@ def static_main(file, md5):
     else:
       seq_dict.update({api_list[i]:0})
   seq_pd = pd.DataFrame(seq_dict,index=[0])
+  #sec, dll
   sec,dll = pe_info(file)
+  '''section = []
+  for i in range(len(sec)):
+    section.append( {'Name':sec[i].Name.decode('utf-8').rstrip('\x00'), 'Virtual_Address':sec[i].VirtualAddress,
+                  'Virtual_Size':sec[i].Misc_VirtualSize, 'Raw_Size':sec[i].SizeOfRawData, 'Entropy':sec[i].get_entropy(),
+                  'Md5':sec[i].get_hash_md5()} )'''
+  import_dll = []
+  for j in range(len(dll)):
+    import_dll.append(dll[j].dll.decode('utf-8'))
+
+  #img
   img = grayscale_image(file)
+  #file size in bytes
+  size =convert_size(len(file))
+
 
   pickle_in = open('XGB.pickle','rb')
   XGB = pickle.load(pickle_in)
+  #pred
   pred = XGB.predict_proba(seq_pd)
 
 
   # 幫我依序填入要存到db的值，順序可參考database.py被註解的main
-  args = [md5, pred[0][0], size, len(sec), ....]
+  args = [md5, pred[0][0], size, len(sec), import_dll, imported_apis, img]
   store_static_prediction(args)
 
   # 不用return了 因為已經存到db
