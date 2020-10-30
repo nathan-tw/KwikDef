@@ -9,14 +9,16 @@ import ReportTable from "views/index-sections/ReportTable";
 // core components
 import AttTypePieChart from "../index-sections/AttTypePieChart";
 
-function ChartPage() {
+function ChartPage(props) {
+  const data = props.location.state.data;
+  console.log(data);
   return (
     <>
       <ExamplesNavbar />
       <div className="section section-about-us">
         <Container>
           <h2>Analysis Report</h2>
-          <ReportTable/>
+          <ReportTable md5="sghiowegjowj" size="1.34" malicious="69.2"/>
           <Row>
             <Col>
               <h4>Attact Type</h4>

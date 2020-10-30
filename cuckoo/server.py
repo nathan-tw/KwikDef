@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import static_model
+#import static_model
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -14,13 +14,15 @@ def index():
 @app.route('/predict/dynamic', methods=['POST'])
 def uploadDynamic():
     file = request.files['file']
-    f = open(file, 'rb')
     return 'Hello, World1'
 
 @app.route('/predict/static', methods=['POST'])
 def uploadStatic():
     file = request.files['file']
+    data = file.read()
     hash = file.filename
+    static_model.static_main(file, hash)
+    print(data)
     return 'success'
 
 app.run()
