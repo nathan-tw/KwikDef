@@ -28,7 +28,7 @@ func FileUploader(ctx *gin.Context) {
 	}
 	
 	if analysisType == "static" {
-		_ = StaticTaskSubmitter(file) // send to static model
+		// _ = StaticTaskSubmitter(file) // send to static model
 	} else {
 		// taskId (type: []byte) := DynamicTaskSubmitter(file)
 		// add task to worker

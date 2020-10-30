@@ -13,6 +13,7 @@
     "react": "16.13.1",
     "react-bootstrap-switch": "15.5.3",
     "react-chartjs-2": "^2.10.0",
+    "react-circle-progress-bar": "^0.1.4",
     "react-datetime": "2.16.3",
     "react-dom": "16.13.1",
     "react-minimal-pie-chart": "^8.0.1",
