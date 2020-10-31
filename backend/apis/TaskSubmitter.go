@@ -9,7 +9,7 @@ import (
 )
 
 func DynamicTaskSubmitter(fh *multipart.FileHeader) []byte {
-	REST_URL := "http://140.119.19.46:8090/tasks/create/file"
+	REST_URL := "http://127.0.0.1:8090/tasks/create/file"
 	f, err := fh.Open()
 	if err != nil {
 		panic("error when open file")
@@ -45,7 +45,7 @@ func DynamicTaskSubmitter(fh *multipart.FileHeader) []byte {
 }
 
 func StaticTaskSubmitter(fh *multipart.FileHeader) []byte {
-	REST_URL := "http://127.0.0.1:5000/predict/static"
+	REST_URL := "http://140.119.19.46:5000/predict/static"
 	f, err := fh.Open()
 	if err != nil {
 		panic("error when open file")
