@@ -10,11 +10,10 @@ import { Container, Table, Button, Alert } from "reactstrap";
 function ReportsPage() {
   const [isDone, setIsDone] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
-  const [isDone, setIsDone] = useState(false);
   const [jsonObj, setJsonObj] = useState({});
   const onSubmit = async (e) => {
     const id = e.target.id;
-    const res = await axios.get(`http://140.119.19.46:8080/report/${id}`);
+    const res = await axios.get(`http://127.0.0.1:8080/report/${id}`);
     if (res.status === 200) {
       setJsonObj(res.data);
       setIsDone(true);

@@ -35,7 +35,7 @@ const FileUploader = () => {
     })
     formData.append("analysisType", analysisType)
     const res = await axios.post(
-      "http://140.119.19.46:8080/file/submit",
+      "http://127.0.0.1:8080/file/submit",
       formData,
       {
         headers: {
