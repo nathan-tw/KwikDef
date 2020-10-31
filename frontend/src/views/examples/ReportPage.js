@@ -10,6 +10,7 @@ import { Container, Table, Button, Alert } from "reactstrap";
 function ReportsPage() {
   const [isDone, setIsDone] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const [jsonObj, setJsonObj] = useState({});
   const onSubmit = async (e) => {
     const id = e.target.id;

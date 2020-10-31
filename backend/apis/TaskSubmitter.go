@@ -9,7 +9,7 @@ import (
 )
 
 func DynamicTaskSubmitter(fh *multipart.FileHeader) []byte {
-	REST_URL := "http://140.119.19.46:8090/tasks/create/file"
+	REST_URL := "http://127.0.0.1:8090/tasks/create/file"
 	f, err := fh.Open()
 	if err != nil {
 		panic("error when open file")
