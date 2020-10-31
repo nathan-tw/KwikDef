@@ -10,7 +10,7 @@ import (
 
 const (
     // Initialize connection constants.
-	HOST     = "127.0.0.1"
+	HOST     = "140.119.19.46"
 	PORT     = 5432
     DATABASE = "postgres"
     USER     = "postgres"

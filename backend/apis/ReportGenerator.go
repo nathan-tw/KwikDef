@@ -8,7 +8,7 @@ import (
 )
 
 func ReportGenerator(id string) io.ReadCloser {
-	REST_URL := "http://140.119.19.46:8090/tasks/report/"+id
+	REST_URL := "http://127.0.0.1:8090/tasks/report/"+id
 
 	req, _ := http.NewRequest("GET", REST_URL, nil)
 	req.Header.Set("Authorization", "Bearer 1otpa8k6IlPzM2Qu0TLP3g")
