@@ -1,4 +1,5 @@
 import psycopg2
+import static_model
 
 def store_static_prediction(*args):
     # Update connection string information
@@ -24,16 +25,7 @@ def store_static_prediction(*args):
     cursor.close()
     conn.close()
 
-# if __name__ == "__main__":
-#     report = {
-#         'md5': 'f23o4ifhkwe',
-#         'malicious': 0.312,
-#         'size': 23.4,
-#         'number_of_section': 4,
-#         'dlls': ['23fiou', '2fhuui'],
-#         'imported_apis': ['23fiou', '2fhuui'],
-#         'gray_scale': [[1, 2, 3], [2, 4, 5]]
-#     }
-
-#     args = [item for item in report.values()]
-#     store_static_prediction(args)
+if __name__ == "__main__":
+    with open('', 'rb') as f:
+        data = f.read()
+    static_model.static_main(data)
