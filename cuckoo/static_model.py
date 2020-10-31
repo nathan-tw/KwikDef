@@ -8,6 +8,8 @@ import pickle
 import numpy as np
 from math import sqrt, ceil, pow, floor, log
 from database import store_static_prediction
+import xgboost
+import sklearn
 
 def contain_symbol(keyword):
   symbols = "~!@#$%^&*()_+-*/<>,.[]\/"
@@ -76,7 +78,7 @@ def grayscale_image(data):
   pad_len = new_len - data_len
   padded_d = np.hstack((d, np.zeros(pad_len, np.uint8)))
   im = np.reshape(padded_d, (sqrt_len, sqrt_len))
-  
+
   return im
 
 def report_generator(md5, pred, sec, dll, img):
@@ -99,7 +101,7 @@ def report_generator(md5, pred, sec, dll, img):
     jobj['Sections'].append( {'Name':sec[i].Name.decode('utf-8').rstrip('\x00'), 'Virtual_Address':sec[i].VirtualAddress,
                   'Virtual_Size':sec[i].Misc_VirtualSize, 'Raw_Size':sec[i].SizeOfRawData, 'Entropy':sec[i].get_entropy(),
                   'Md5':sec[i].get_hash_md5()} )
-  
+
   return jobj
 
 import_api_dict = {}
@@ -143,8 +145,10 @@ def static_main(file, md5):
 
   #img
   img = grayscale_image(file)
+
   #file size in bytes
-  size =convert_size(len(file))
+  size =len(file)
+
 
 
   pickle_in = open('XGB.pickle','rb')
@@ -154,9 +158,9 @@ def static_main(file, md5):
 
 
   # 幫我依序填入要存到db的值，順序可參考database.py被註解的main
-  args = [md5, pred[0][0], size, len(sec), import_dll, imported_apis, img]
+  args = [md5, float(pred[0][0]), size, len(sec), import_dll, imported_apis, img.tolist()]
   store_static_prediction(args)
 
   # 不用return了 因為已經存到db
-  # ret_val = report_generator(md5, pred, sec, dll, img)
-  # return ret_val
+  #ret_val = report_generator(md5, pred, sec, dll, img)
+  return args

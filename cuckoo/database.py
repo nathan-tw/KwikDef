@@ -26,6 +26,6 @@ def store_static_prediction(*args):
     conn.close()
 
 if __name__ == "__main__":
-    with open('', 'rb') as f:
+    with open('/home/atsl/Desktop/malware/016/md5_new_2017/c44d369e8c39ed718c10d0f9e3f2e650', 'rb') as f:
         data = f.read()
-    static_model.static_main(data)
+    res = static_model.static_main(data, 'test')
