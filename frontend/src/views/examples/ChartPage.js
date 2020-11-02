@@ -10,14 +10,14 @@ import StaticInfo from "views/index-sections/StaticInfo";
 import AttTypePieChart from "../index-sections/AttTypePieChart";
 
 function ChartPage(props) {
-  // const data = props.location.state.data;
+  const data = props.location.state.data;
   return (
     <>
       <ExamplesNavbar />
       <div className="section section-about-us">
         <Container>  
           <h2>Static Analysis</h2>
-          <ReportTable md5="sghiowegjowj" size="1.34" malicious="69.2"/>
+          <ReportTable data={data}/>
           <StaticInfo />
           <h2>Dynamic Analysis</h2>
           <Row>

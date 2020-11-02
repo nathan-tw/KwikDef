@@ -2,30 +2,23 @@ import React from "react";
 import { Table } from "reactstrap";
 
 const ReportTable = (props) => {
+  const data = props.data
   return (
     <Table bordered>
       <thead>
         <tr>
           <th>MD5</th>
-          <th>{props.md5}</th>
+          <th>{data.MD5}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Size</td>
-          <td>{props.size} mb</td>
+          <td>{data.size} bytes</td>
         </tr>
         <tr>
           <td>Malicious</td>
-          <td>{props.malicious}%</td>
-        </tr>
-        <tr>
-          <td>Attact type</td>
-          <td>Others</td>
-        </tr>
-        <tr>
-          <td>Family type</td>
-          <td>Sality</td>
+          <td>{data.malicious}%</td>
         </tr>
       </tbody>
     </Table>
