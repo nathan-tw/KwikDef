@@ -5,19 +5,21 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import FamilyPieChart from "views/index-sections/FamilyPieChart copy";
 import ReportTable from "views/index-sections/ReportTable";
-
+import StaticInfo from "views/index-sections/StaticInfo";
 // core components
 import AttTypePieChart from "../index-sections/AttTypePieChart";
 
 function ChartPage(props) {
-  const data = props.location.state.data;
+  // const data = props.location.state.data;
   return (
     <>
       <ExamplesNavbar />
       <div className="section section-about-us">
-        <Container>
-          <h2>Analysis Report</h2>
+        <Container>  
+          <h2>Static Analysis</h2>
           <ReportTable md5="sghiowegjowj" size="1.34" malicious="69.2"/>
+          <StaticInfo />
+          <h2>Dynamic Analysis</h2>
           <Row>
             <Col>
               <h4>Attact Type</h4>
