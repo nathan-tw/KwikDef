@@ -10,9 +10,9 @@ import {
   } from "reactstrap";
 import axios from "axios";
 
-function StaticInfo(){
+function StaticInfo(props){
     const [modal1, setModal1] = useState(false);
-   
+    const data = props.data
     return(
         <div>
             <Button 
@@ -32,11 +32,9 @@ function StaticInfo(){
                     </div>
                     <ModalBody>
                         <h5 className="title">Dlls</h5>
-                        <p>23fiou</p>
-                        <p>2fhuui</p>
+                        {data.dlls.map(dll => <p>{dll}</p>)}
                         <h5 className="title">Import API Calls</h5>
-                        <p>WNetAddConnection</p>
-                        <p>WNetConnectionDialog</p>
+                        {data.imported_api.map(api => <p>{api}</p>)}
                         <h5 className="title">Number of Sections</h5>
                         <p>4</p>
                     </ModalBody>

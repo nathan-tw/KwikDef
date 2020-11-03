@@ -18,7 +18,7 @@ function ChartPage(props) {
         <Container>  
           <h2>Static Analysis</h2>
           <ReportTable data={data}/>
-          <StaticInfo />
+          <StaticInfo data={data}/>
           <h2>Dynamic Analysis</h2>
           <Row>
             <Col>
