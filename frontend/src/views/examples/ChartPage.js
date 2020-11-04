@@ -8,6 +8,7 @@ import ReportTable from "views/index-sections/ReportTable";
 import StaticInfo from "views/index-sections/StaticInfo";
 // core components
 import AttTypePieChart from "../index-sections/AttTypePieChart";
+import Progress from "react-circle-progress-bar";
 
 function ChartPage(props) {
   const data = props.location.state.data;
@@ -15,10 +16,17 @@ function ChartPage(props) {
     <>
       <ExamplesNavbar />
       <div className="section section-about-us">
-        <Container>  
-          <h2>Static Analysis</h2>
-          <ReportTable data={data}/>
-          <StaticInfo data={data}/>
+        <Container>
+          <h2>Basic Information</h2>
+          <Row>
+            <Col md="3">
+              <Progress progress={data.malicious*100} strokeWidth="10" subtitle="Malicious"></Progress>
+            </Col>
+            <Col>
+              <ReportTable data={data} />
+            </Col>
+          </Row>
+          <StaticInfo data={data} />
           <h2>Dynamic Analysis</h2>
           <Row>
             <Col>

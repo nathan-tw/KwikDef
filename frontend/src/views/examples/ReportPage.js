@@ -13,6 +13,8 @@ function ReportsPage() {
   const [jsonObj, setJsonObj] = useState({});
   const onSubmit = async (e) => {
     const id = e.target.id;
+    const filename = e.target.name;
+    console.log(filename)
     let statusCode = 200;
     const res = await axios
       .get(`http://127.0.0.1:8080/report/${id}`)
@@ -21,6 +23,7 @@ function ReportsPage() {
         setIsFailed(true);
       });
     if (statusCode !== 500) {
+      res.data['filename'] = filename;
       setJsonObj(res.data);
       setIsDone(true);
     }
@@ -70,7 +73,7 @@ function ReportsPage() {
                       <td>{data.name}</td>
                       <td>{data.hash}</td>
                       <td>
-                        <Button color="info" id={data.hash} onClick={onSubmit}>
+                        <Button color="info" id={data.hash} name={data.name} onClick={onSubmit}>
                           check
                         </Button>
                       </td>
