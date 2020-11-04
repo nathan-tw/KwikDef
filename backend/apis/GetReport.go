@@ -20,6 +20,10 @@ import(
 func GetReport(ctx *gin.Context) {
 	hash := ctx.Param("id")
 	result := database.SearchStaticPrediction(hash)
-	ctx.JSON(200, result)
+	if result == nil {
+		ctx.JSON(500, "not a pe file")
+	} else {
+		ctx.JSON(200, result)
+	}
 	ctx.Next()
 }

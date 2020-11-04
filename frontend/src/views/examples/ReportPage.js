@@ -1,7 +1,7 @@
 import axios from "axios";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
-import React, {useState} from "react";
-import { Redirect } from "react-router-dom"
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 // reactstrap components
 import { Container, Table, Button, Alert } from "reactstrap";
 
@@ -13,12 +13,16 @@ function ReportsPage() {
   const [jsonObj, setJsonObj] = useState({});
   const onSubmit = async (e) => {
     const id = e.target.id;
-    const res = await axios.get(`http://127.0.0.1:8080/report/${id}`);
-    if (res.status === 200) {
+    let statusCode = 200;
+    const res = await axios
+      .get(`http://127.0.0.1:8080/report/${id}`)
+      .catch((error) => {
+        statusCode = error.response.status;
+        setIsFailed(true);
+      });
+    if (statusCode !== 500) {
       setJsonObj(res.data);
       setIsDone(true);
-    } else {
-      setIsFailed(true);
     }
   };
 
@@ -31,33 +35,19 @@ function ReportsPage() {
 
   return (
     <>
-      {isDone ? <Redirect to={{
+      {isDone ? (
+        <Redirect
+          to={{
             pathname: "/chart-page/test",
-            state: { data: jsonObj }
-          }} /> : null}
-      {isFailed ? (
-        <Alert color="info">
-          <Container>
-            <div className="alert-icon">
-              <i className="now-ui-icons travel_info"></i>
-            </div>
-            <strong>Sorry! </strong>
-            Your file hasn'd been done.
-            <button
-              type="button"
-              className="close"
-              onClick={() => setIsFailed(false)}
-            >
-              <span aria-hidden="true">
-                <i className="now-ui-icons ui-1_simple-remove"></i>
-              </span>
-            </button>
-          </Container>
-        </Alert>
+            state: { data: jsonObj },
+          }}
+        />
       ) : null}
       <ExamplesNavbar />
+      
       <div className="section section-about-us">
         <Container>
+        {isFailed ? <Alert color="primary">This is not a PE file</Alert>: null}
           <h2>History Submit</h2>
           {submitData.length === 0 ? (
             <Alert>You haven't submit any file before</Alert>

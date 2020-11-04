@@ -59,7 +59,9 @@ func SearchStaticPrediction(MD5 string) gin.H {
 	row := db.QueryRow(sql_statement, MD5)
 	fmt.Println("Select 1 row of data")
 	err = row.Scan(&MD5, &malicious, &size, &number_of_section, pq.Array(&imported_apis), pq.Array(&dlls))
-	checkError(err)
+	if err != nil {
+		return nil
+	}
 	result := gin.H{
 		"MD5":               MD5,
 		"malicious":         malicious,
