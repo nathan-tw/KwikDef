@@ -24,6 +24,10 @@ const ReportTable = (props) => {
           <td>Malicious</td>
           <td>{data.malicious*100}%</td>
         </tr>
+        <tr>
+          <td>Number of sections</td>
+          <td>{data.number_of_section}</td>
+        </tr>
       </tbody>
     </Table>
   );

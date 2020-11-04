@@ -17,16 +17,21 @@ function ChartPage(props) {
       <ExamplesNavbar />
       <div className="section section-about-us">
         <Container>
+        <br/>
+
           <h2>Basic Information</h2>
           <Row>
             <Col md="3">
               <Progress progress={data.malicious*100} strokeWidth="10" subtitle="Malicious"></Progress>
+              <StaticInfo data={data} />
+
             </Col>
             <Col>
               <ReportTable data={data} />
+
             </Col>
           </Row>
-          <StaticInfo data={data} />
+          <br/>
           <h2>Dynamic Analysis</h2>
           <Row>
             <Col>
