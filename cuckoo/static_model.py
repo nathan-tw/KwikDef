@@ -158,7 +158,7 @@ def static_main(file, md5):
 
 
   # 幫我依序填入要存到db的值，順序可參考database.py被註解的main
-  args = [md5, float(pred[0][0]), size, len(sec), import_dll, imported_apis, img.tolist()]
+  args = [md5, float(pred[0][0]), size, len(sec), imported_apis, import_dll, img.tolist()]
   store_static_prediction(args)
 
   # 不用return了 因為已經存到db

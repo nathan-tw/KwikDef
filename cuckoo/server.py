@@ -21,7 +21,7 @@ def uploadStatic():
     file = request.files['file']
     data = file.read()
     hash = file.filename
-    static_model.static_main(file, hash)
+    static_model.static_main(data, hash)
     return 'success'
 
 app.run(host="140.119.19.46")
