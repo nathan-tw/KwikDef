@@ -19,10 +19,10 @@ Todo list will be done in following days respectively before December. React-app
 
 - <del> fileUploader
 - <del> hashComputer
-- reportGenerator
-- cuckooSubmitter
-- modelPredictor
-- databaseConnector
+- <del> reportGenerator
+- <del> cuckooSubmitter
+- <del> modelPredictor
+- <del> databaseConnector
 
 ### frontend
 
