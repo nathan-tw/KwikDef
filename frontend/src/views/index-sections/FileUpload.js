@@ -94,7 +94,7 @@ const FileUploader = () => {
               type="radio"
             ></Input>
             <span className="form-check-sign"></span>
-            快速靜態分析
+            深度動靜態分析
           </Label>
         </FormGroup>
         <FormGroup check className="form-check-radio">
@@ -107,7 +107,7 @@ const FileUploader = () => {
               value="dynamic"
             ></Input>
             <span className="form-check-sign"></span>
-            深度動靜態分析
+            快速靜態分析
           </Label>
         </FormGroup>
         <div className="input-group is-invalid my-3">

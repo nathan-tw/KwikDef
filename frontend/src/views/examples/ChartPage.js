@@ -22,7 +22,7 @@ function ChartPage(props) {
           <h2>Basic Information</h2>
           <Row>
             <Col md="3">
-              <Progress progress={data.malicious*100} strokeWidth="10" subtitle="Malicious"></Progress>
+              <Progress progress="87.2" gradient={[{stop: 0.0, color: '#581845'}, {stop: 1, color: '#FF5733'}]} strokeWidth="10" subtitle="Malicious"></Progress>
               <StaticInfo data={data} />
 
             </Col>
